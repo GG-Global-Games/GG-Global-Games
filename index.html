@@ -24,6 +24,7 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
         h1, h2, h3, .logo { font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
         a { text-decoration: none; color: inherit; cursor: pointer; }
@@ -41,12 +42,14 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
+            backdrop-filter: blur(10px);
         }
-        .logo { font-size: 2rem; font-weight: 900; color: #fff; }
+        .logo { font-size: 2rem; font-weight: 900; color: #fff; cursor: pointer;}
         .logo span { color: var(--neon-purple); text-shadow: 0 0 10px var(--neon-purple); }
         .nav-links { display: flex; gap: 1.5rem; }
         .nav-links li a:hover { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); transition: 0.3s; }
-        .search-bar { padding: 0.5rem; border-radius: 4px; border: 1px solid var(--neon-purple); background: var(--bg-card); color: #fff; outline: none;}
+        .search-bar { padding: 0.6rem; border-radius: 4px; border: 1px solid var(--neon-purple); background: var(--bg-card); color: #fff; outline: none; width: 200px; transition: 0.3s;}
+        .search-bar:focus { box-shadow: 0 0 10px rgba(157, 78, 221, 0.5); width: 250px; }
 
         /* Estrutura Geral */
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem 5%; min-height: 80vh; }
@@ -69,6 +72,26 @@
         }
         .banner-tag { background: var(--neon-purple); color: #fff; padding: 5px 10px; font-weight: bold; border-radius: 3px; display: inline-block; margin-bottom: 10px; font-size: 0.8rem;}
         .banner h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+        /* Sistema de Filtro de Categorias */
+        .filters { display:flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid #555;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .filter-btn:hover { color: white; border-color: var(--neon-purple); }
+        .filter-btn.active {
+            background: var(--neon-purple);
+            color: white;
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
+        }
 
         /* Grid de Notícias */
         .section-title { font-size: 1.8rem; border-left: 4px solid var(--neon-green); padding-left: 10px; margin-bottom: 1.5rem; }
@@ -93,6 +116,7 @@
             border-radius: 4px;
             font-family: 'Orbitron', sans-serif;
             transition: 0.3s;
+            cursor: pointer;
         }
         .btn-read:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 10px var(--neon-green); }
 
@@ -121,6 +145,8 @@
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 1rem; }
             .nav-links { flex-wrap: wrap; justify-content: center; }
+            .search-bar { width: 100%; }
+            .search-bar:focus { width: 100%; }
             .banner h1 { font-size: 1.8rem; }
             .article-header h1 { font-size: 2rem; }
         }
@@ -133,17 +159,18 @@
         <div class="logo" onclick="navigate('home')">GG<span>.</span></div>
         <ul class="nav-links">
             <li><a onclick="navigate('home')">Início</a></li>
-            <li><a onclick="navigate('home')">Notícias</a></li>
-            <li><a onclick="navigate('home')">Roblox</a></li>
+            <li><a onclick="navigate('home'); filterNews('roblox', document.getElementById('btn-roblox'))">Roblox</a></li>
             <li><a onclick="navigate('home')">Atualizações</a></li>
             <li><a onclick="navigate('about')">Sobre</a></li>
         </ul>
-        <input type="text" class="search-bar" placeholder="Buscar game...">
+        <!-- Adicionei um ID e um evento onkeyup para a busca funcionar -->
+        <input type="text" id="searchInput" class="search-bar" placeholder="Buscar game ou notícia..." onkeyup="searchNews()">
     </header>
 
     <div class="container">
         <!-- PÁGINA INICIAL -->
         <main id="home" class="page active">
+            
             <!-- Banner Destaque -->
             <div class="banner">
                 <span class="banner-tag">DESTAQUE</span>
@@ -151,23 +178,24 @@
                 <p>Confira todas as novidades do patch 29.00 e o que muda no meta competitivo.</p>
                 <br>
                 <div>
-                    <button class="btn-read" onclick="navigate('article')">Lidar Matéria Completa</button>
+                    <button class="btn-read" onclick="navigate('article')">Ler Matéria Completa</button>
                 </div>
             </div>
 
-            <!-- Categorias / Filtro (Simulado) -->
-            <div style="display:flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap;">
-                <button class="btn-read" style="background: var(--neon-purple); color: white; border:none;">Todos</button>
-                <button class="btn-read" style="border-color: #555; color: #aaa;">Roblox</button>
-                <button class="btn-read" style="border-color: #555; color: #aaa;">Minecraft</button>
-                <button class="btn-read" style="border-color: #555; color: #aaa;">eSports</button>
+            <!-- Categorias / Filtro (FUNCIONAL) -->
+            <div class="filters">
+                <button id="btn-todos" class="filter-btn active" onclick="filterNews('todos', this)">Todos</button>
+                <button id="btn-roblox" class="filter-btn" onclick="filterNews('roblox', this)">Roblox</button>
+                <button id="btn-minecraft" class="filter-btn" onclick="filterNews('minecraft', this)">Minecraft</button>
+                <button id="btn-hardware" class="filter-btn" onclick="filterNews('hardware', this)">Hardware & Setup</button>
             </div>
 
             <!-- Lista de Notícias -->
             <h2 class="section-title">Últimas Notícias</h2>
-            <div class="news-grid">
-                <!-- Card 1 -->
-                <div class="news-card">
+            <div class="news-grid" id="news-container">
+                
+                <!-- Card 1 (Roblox) -->
+                <div class="news-card" data-category="roblox">
                     <img src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?q=80&w=600" alt="Roblox" class="news-img">
                     <div class="news-content">
                         <span class="banner-tag" style="background: #e63946;">ROBLOX</span>
@@ -176,8 +204,9 @@
                         <button class="btn-read" onclick="navigate('article')">Ler mais</button>
                     </div>
                 </div>
-                <!-- Card 2 -->
-                <div class="news-card">
+
+                <!-- Card 2 (Minecraft) -->
+                <div class="news-card" data-category="minecraft">
                     <img src="https://images.unsplash.com/photo-1628527305929-e889ee839171?q=80&w=600" alt="Minecraft" class="news-img">
                     <div class="news-content">
                         <span class="banner-tag" style="background: #2a9d8f;">MINECRAFT</span>
@@ -186,8 +215,9 @@
                         <button class="btn-read" onclick="navigate('article')">Ler mais</button>
                     </div>
                 </div>
-                <!-- Card 3 -->
-                <div class="news-card">
+
+                <!-- Card 3 (Hardware) -->
+                <div class="news-card" data-category="hardware">
                     <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=600" alt="Setup" class="news-img">
                     <div class="news-content">
                         <span class="banner-tag" style="background: var(--neon-purple);">HARDWARE</span>
@@ -196,6 +226,7 @@
                         <button class="btn-read" onclick="navigate('article')">Ler mais</button>
                     </div>
                 </div>
+
             </div>
         </main>
 
@@ -252,8 +283,9 @@
         <p style="color: var(--text-muted); margin-top: 10px;">&copy; 2023 GG - Global Games. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- SCRIPT DE NAVEGAÇÃO -->
+    <!-- SCRIPT DE INTERAÇÕES (NAVEGAÇÃO, FILTROS E BUSCA) -->
     <script>
+        // 1. Função de navegar entre as páginas
         function navigate(pageId) {
             // Esconde todas as páginas
             document.querySelectorAll('.page').forEach(page => {
@@ -263,6 +295,62 @@
             document.getElementById(pageId).classList.add('active');
             // Rola para o topo
             window.scrollTo(0, 0);
+
+            // Limpa a barra de pesquisa se mudar de página
+            document.getElementById('searchInput').value = "";
+            searchNews(); 
+        }
+
+        // 2. Sistema de Filtro de Categorias (Botões)
+        function filterNews(category, buttonElement) {
+            // Atualiza cor do botão clicado
+            let buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if(buttonElement) {
+                buttonElement.classList.add('active');
+            }
+
+            // Filtra os cards
+            let cards = document.querySelectorAll('.news-card');
+            cards.forEach(card => {
+                if (category === 'todos' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Limpa a busca ao clicar em uma categoria
+            document.getElementById('searchInput').value = "";
+        }
+
+        // 3. Sistema de Busca (Input de texto)
+        function searchNews() {
+            // Pega o texto digitado e transforma em letras minúsculas
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.news-card');
+            
+            // Garante que estamos na página inicial ao buscar
+            if(input.length > 0) {
+                navigate('home');
+            }
+
+            // Tira a cor de botão ativo das categorias quando fazemos uma busca
+            let buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Verifica card por card se o título ou o texto batem com a busca
+            cards.forEach(card => {
+                let title = card.querySelector('h3').innerText.toLowerCase();
+                let desc = card.querySelector('p').innerText.toLowerCase();
+
+                if (title.includes(input) || desc.includes(input)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
