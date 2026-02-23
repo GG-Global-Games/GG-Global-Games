@@ -132,19 +132,20 @@
         .sec-t .bar{width:4px;height:32px;background:var(--gg);border-radius:4px}
         .sec-t h2{font-family:'Orbitron',sans-serif;font-size:24px;font-weight:800;letter-spacing:1px}
         .sec-t .cnt{background:rgba(124,58,237,.2);color:var(--p);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
-        .see-all{color:var(--p);text-decoration:none;font-size:14px;font-weight:600}
+        .see-all{color:var(--p);text-decoration:none;font-size:14px;font-weight:600;cursor:pointer}
         .cats{display:flex;gap:10px;margin-bottom:48px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}.cats::-webkit-scrollbar{display:none}
         .chip{display:flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,.05);border:2px solid var(--border);border-radius:var(--rs);color:var(--ts);font-size:13px;font-weight:600;cursor:pointer;transition:all .3s;white-space:nowrap}
         .chip:hover,.chip.active{border-color:var(--p);color:var(--t);background:rgba(124,58,237,.15)}
         .chip.active{background:var(--gp);color:#fff;border-color:transparent}
+        .chip img{width:20px;height:20px;border-radius:4px;object-fit:cover}
 
         /* NEWS GRID */
         .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:48px}
         .n-card{background:var(--gc);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .4s;cursor:pointer;position:relative}
         .n-card:hover{transform:translateY(-6px);border-color:rgba(124,58,237,.3);box-shadow:0 20px 60px rgba(0,0,0,.4)}
         .n-img{position:relative;height:200px;overflow:hidden}
-        .n-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-        .n-card:hover .n-img img{transform:scale(1.05)}
+        .n-img img.cover-img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+        .n-card:hover .n-img img.cover-img{transform:scale(1.05)}
         .n-img .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;transition:transform .4s}
         .n-card:hover .ph{transform:scale(1.05)}
         .ph.purple{background:linear-gradient(135deg,#2d1b69,#1a0a3e)}.ph.green{background:linear-gradient(135deg,#064e3b,#022c22)}.ph.blue{background:linear-gradient(135deg,#1e3a5f,#0f172a)}.ph.red{background:linear-gradient(135deg,#5f1e1e,#2a0f0f)}.ph.orange{background:linear-gradient(135deg,#5f3f1e,#2a1a0f)}.ph.cyan{background:linear-gradient(135deg,#1e4a5f,#0f2a3a)}
@@ -181,6 +182,33 @@
         .t-meta .up{color:var(--g)}
         .t-thumb{width:64px;height:64px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background-size:cover;background-position:center;overflow:hidden}
         .t-thumb img{width:100%;height:100%;object-fit:cover}
+
+        /* COMMENTS */
+        .comments-section{margin-top:48px;padding-top:40px;border-top:2px solid var(--border)}
+        .comments-title{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+        .comments-subtitle{font-size:13px;color:var(--tm);margin-bottom:28px}
+        .comment-form{background:var(--gc);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:32px}
+        .comment-form h4{font-size:14px;font-weight:600;margin-bottom:16px;color:var(--ts)}
+        .comment-guest-notice{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:14px;padding:20px;text-align:center;margin-bottom:32px}
+        .comment-guest-notice p{font-size:14px;color:var(--ts);margin-bottom:12px}
+        .comment-guest-notice button{padding:10px 24px;background:var(--gp);border:none;border-radius:10px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+        .comment-input{width:100%;padding:12px 16px;background:rgba(255,255,255,.05);border:2px solid var(--border);border-radius:var(--rs);color:var(--t);font-size:14px;font-family:'Inter',sans-serif;outline:none;resize:vertical;min-height:100px;transition:all .3s}
+        .comment-input:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(124,58,237,.08)}
+        .comment-input::placeholder{color:var(--tm)}
+        .comment-submit{margin-top:12px;padding:12px 28px;background:var(--gp);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .3s;display:flex;align-items:center;gap:8px}
+        .comment-submit:hover{transform:translateY(-2px);box-shadow:var(--sp)}
+        .comment-pending-notice{padding:14px 18px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;font-size:13px;color:#fbbf24;margin-top:12px;display:none}
+        .comment-pending-notice.show{display:block}
+        .comment-item{padding:20px;background:var(--gc);border:1px solid var(--border);border-radius:16px;margin-bottom:12px;animation:fadeUp .3s ease}
+        .comment-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+        .comment-author{display:flex;align-items:center;gap:10px}
+        .comment-av{width:36px;height:36px;border-radius:10px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;overflow:hidden;flex-shrink:0}
+        .comment-av img{width:100%;height:100%;object-fit:cover}
+        .comment-name{font-size:14px;font-weight:600;line-height:1.2}
+        .comment-time{font-size:11px;color:var(--tm);margin-top:1px}
+        .comment-text{font-size:14px;color:var(--ts);line-height:1.7}
+        .no-comments{text-align:center;padding:40px;color:var(--tm);font-size:14px}
+        .no-comments span{display:block;font-size:36px;margin-bottom:8px}
 
         /* ARTICLE READER */
         .article-reader{max-width:800px;margin:0 auto;padding:96px 24px 60px}
@@ -239,10 +267,11 @@
         .admin-side-header h3{font-family:'Orbitron',sans-serif;font-size:16px;font-weight:800;color:#f59e0b;margin-bottom:4px}
         .admin-side-header p{font-size:12px;color:var(--tm)}
         .admin-nav{display:flex;flex-direction:column;gap:4px}
-        .admin-nav a{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--ts);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;cursor:pointer}
+        .admin-nav a{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--ts);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;cursor:pointer;position:relative}
         .admin-nav a:hover,.admin-nav a.active{background:rgba(245,158,11,.15);color:var(--t)}
         .admin-nav a.active{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#000;font-weight:700}
         .admin-nav .an{font-size:16px;width:22px;text-align:center}
+        .admin-nav .badge-count{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:#ef4444;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
         .admin-main{min-width:0}
         .admin-welcome{background:linear-gradient(135deg,#2a1a00,#13131f);border:1px solid rgba(245,158,11,.2);border-radius:20px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden}
         .admin-welcome::after{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:#f59e0b;border-radius:50%;filter:blur(80px);opacity:.15}
@@ -264,6 +293,7 @@
         .a-field select option{background:var(--card);color:var(--t)}
         .a-field textarea{min-height:120px}
         .a-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .a-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
 
         /* RICH EDITOR */
         .editor-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:10px;background:rgba(255,255,255,.03);border:2px solid var(--border);border-bottom:none;border-radius:var(--rs) var(--rs) 0 0}
@@ -288,6 +318,20 @@
         .img-upload.has-image .upload-text{display:none}
         .img-upload .remove-img{position:absolute;top:8px;right:8px;width:32px;height:32px;background:rgba(239,68,68,.9);border:none;border-radius:8px;color:#fff;font-size:16px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:2}
         .img-upload.has-image .remove-img{display:flex}
+
+        /* CAT IMAGE UPLOAD (smaller) */
+        .img-upload-sm{position:relative;border:2px dashed var(--border);border-radius:var(--rs);padding:16px;text-align:center;cursor:pointer;transition:all .3s;overflow:hidden}
+        .img-upload-sm:hover{border-color:#f59e0b;background:rgba(245,158,11,.05)}
+        .img-upload-sm.has-image{padding:0;border-style:solid;border-color:rgba(245,158,11,.4)}
+        .img-upload-sm input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:1}
+        .img-upload-sm .upload-text-sm{color:var(--tm);font-size:12px}
+        .img-upload-sm .upload-text-sm span{display:block;font-size:20px;margin-bottom:4px}
+        .img-upload-sm .preview-img-sm{width:100%;height:80px;object-fit:cover;border-radius:10px;display:none}
+        .img-upload-sm.has-image .preview-img-sm{display:block}
+        .img-upload-sm.has-image .upload-text-sm{display:none}
+        .img-upload-sm .remove-img-sm{position:absolute;top:4px;right:4px;width:24px;height:24px;background:rgba(239,68,68,.9);border:none;border-radius:6px;color:#fff;font-size:12px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:2}
+        .img-upload-sm.has-image .remove-img-sm{display:flex}
+
         .tags-input-wrap{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:rgba(255,255,255,.05);border:2px solid var(--border);border-radius:var(--rs);min-height:48px;align-items:center;cursor:text;transition:all .3s}
         .tags-input-wrap:focus-within{border-color:#f59e0b}
         .tags-input-wrap .tag-pill{display:flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:6px;font-size:12px;color:#fbbf24;font-weight:600}
@@ -305,13 +349,20 @@
         .a-table .thumb-ph{width:48px;height:48px;border-radius:10px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:18px}
         .a-table .status{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700}
         .a-table .status.published{background:rgba(16,185,129,.15);color:var(--g)}.a-table .status.draft{background:rgba(245,158,11,.15);color:#f59e0b}
-        .a-table .actions{display:flex;gap:8px}
+        .a-table .status.pending{background:rgba(245,158,11,.15);color:#f59e0b}
+        .a-table .status.approved{background:rgba(16,185,129,.15);color:var(--g)}
+        .a-table .status.rejected{background:rgba(239,68,68,.15);color:#ef4444}
+        .a-table .actions{display:flex;gap:8px;flex-wrap:wrap}
         .a-table .actions button{padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--ts);font-size:12px;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
         .a-table .actions button:hover{border-color:var(--p);color:var(--t)}
         .a-table .actions button.del:hover{border-color:#ef4444;color:#ef4444}
+        .a-table .actions button.approve:hover{border-color:var(--g);color:var(--g)}
         .table-scroll{overflow-x:auto}
         .empty-state{text-align:center;padding:48px;color:var(--tm)}.empty-state span{font-size:48px;display:block;margin-bottom:12px}
         .admin-panel{display:none}.admin-panel.active{display:block}
+
+        /* CAT thumb in chip */
+        .chip-img{width:20px;height:20px;border-radius:4px;object-fit:cover}
 
         /* MOBILE */
         .mob-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;opacity:0;transition:opacity .3s}.mob-overlay.show{opacity:1}
@@ -330,7 +381,7 @@
         @keyframes tOut{from{opacity:1}to{opacity:0;transform:translateX(100px)}}
 
         @media(max-width:1024px){.nav{display:none}.mob-btn{display:flex}.hero-stats{display:none}.hero-title{font-size:36px}.hero-content{padding:32px}.f-top{grid-template-columns:1fr 1fr}.admin-stats{grid-template-columns:repeat(2,1fr)}.admin-layout{grid-template-columns:1fr}.admin-side{display:none}}
-        @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.logo{font-size:24px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:300px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.login-logo h1{font-size:40px}.v-ban{flex-direction:column;text-align:center}.ar-title{font-size:26px}.ar-cover{height:250px}.a-row{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.editor-toolbar{gap:2px}.editor-toolbar button{padding:4px 8px;font-size:11px}}
+        @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.logo{font-size:24px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:300px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.login-logo h1{font-size:40px}.v-ban{flex-direction:column;text-align:center}.ar-title{font-size:26px}.ar-cover{height:250px}.a-row{grid-template-columns:1fr}.a-row3{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.editor-toolbar{gap:2px}.editor-toolbar button{padding:4px 8px;font-size:11px}}
         @media(max-width:480px){.hero-title{font-size:24px}.admin-stats{grid-template-columns:1fr}.ar-title{font-size:22px}}
     </style>
 </head>
@@ -355,16 +406,20 @@
 
 <!-- MOBILE -->
 <div class="mob-overlay" id="mobOverlay" onclick="closeMob()"></div>
-<div class="mob-side" id="mobSide"><button class="m-close" onclick="closeMob()">✕</button><div style="margin-top:8px;text-align:center"><span class="logo">GG<span>.</span></span></div><div class="m-nav"><a onclick="goPage('home')">🏠 Início</a><a onclick="goPage('admin')" id="mobAdminLink" style="display:none">⚙️ Admin</a><div class="m-div"></div><a href="#">🔥 Em Alta</a><a href="#">🎮 Jogos</a><div class="m-div"></div><a id="mobAuth" onclick="mobAuthAction()">🚪 Sair</a></div></div>
+<div class="mob-side" id="mobSide"><button class="m-close" onclick="closeMob()">✕</button><div style="margin-top:8px;text-align:center"><span class="logo">GG<span>.</span></span></div><div class="m-nav"><a onclick="goPage('home');closeMob()">🏠 Início</a><a onclick="goToTrending();closeMob()">🔥 Em Alta</a><a onclick="goPage('admin')" id="mobAdminLink" style="display:none">⚙️ Admin</a><div class="m-div"></div><a id="mobAuth" onclick="mobAuthAction()">🚪 Sair</a></div></div>
 
 <!-- HEADER -->
 <header id="header"><div class="h-bar">
 <button class="mob-btn" onclick="openMob()">☰</button>
 <a class="logo" onclick="goPage('home')">GG<span>.</span></a>
-<nav class="nav"><a onclick="goPage('home')" class="active">Início</a><a href="#">Em Alta</a><a href="#">Jogos</a><a href="#">E-Sports</a><a onclick="goPage('admin')" id="navAdminLink" style="display:none">⚙️ Admin</a></nav>
+<nav class="nav">
+    <a onclick="goPage('home')" class="active" id="navHome">Início</a>
+    <a onclick="goToTrending()" id="navTrending">🔥 Em Alta</a>
+    <a onclick="goPage('admin')" id="navAdminLink" style="display:none">⚙️ Admin</a>
+</nav>
 <div class="search-box"><input type="text" placeholder="Buscar..." id="searchInput"><span class="si">🔍</span></div>
 <div class="user-area">
-<button class="notif-btn">🔔<span class="notif-badge">3</span></button>
+<button class="notif-btn" id="notifBtn" onclick="checkAdminNotif()">🔔<span class="notif-badge" id="notifBadge" style="display:none">!</span></button>
 <div class="u-profile" onclick="toggleDD()"><div class="u-avatar" id="uAvatar">V</div><div class="u-info"><span class="u-name" id="uName">Visitante</span><span class="u-role guest" id="uRole">👁️ Visitante</span></div>
 <div class="u-dd" id="uDD"><div class="dd-head"><div class="dd-av" id="ddAv">V</div><div><div class="dd-n" id="ddN">Visitante</div><div class="dd-e" id="ddE">Não logado</div></div></div><a onclick="goPage('home')">🏠 Início</a><div id="ddAdminLink"></div><div class="dd-div"></div><div id="ddAuth"></div></div>
 </div></div></div></header>
@@ -374,13 +429,13 @@
 <div class="v-ban" id="vBanner"><div class="v-ban-text"><span>👁️</span><span>Modo <strong>visitante</strong>. Faça login para tudo!</span></div><div style="display:flex;gap:10px"><button class="v-login" onclick="goLogin()">Login</button><button class="v-x" onclick="this.closest('.v-ban').classList.remove('show')">✕</button></div></div>
 <section class="hero"><div class="hero-card" id="heroCard" onclick="clickHero()"><div class="hero-cover" id="heroCover"></div><div class="hero-fx"><div class="hero-grid"></div><div class="hero-glow p"></div><div class="hero-glow g"></div></div>
 <div class="hero-stats"><div class="hero-stat"><div class="hero-stat-v" id="statArticles">0</div><div class="hero-stat-l">Matérias</div></div><div class="hero-stat"><div class="hero-stat-v" id="statViews">0</div><div class="hero-stat-l">Views Total</div></div></div>
-<div class="hero-content"><div class="hero-badge"><span class="pulse"></span>DESTAQUE</div><h1 class="hero-title" id="heroTitle">BEM-VINDO AO GG.</h1><p class="hero-desc" id="heroDesc">Seu portal gamer.</p><div class="hero-actions"><button class="btn-p">🎮 EXPLORAR</button><button class="btn-s">📺 TRAILERS</button></div></div></div></section>
+<div class="hero-content"><div class="hero-badge"><span class="pulse"></span>DESTAQUE</div><h1 class="hero-title" id="heroTitle">BEM-VINDO AO GG.</h1><p class="hero-desc" id="heroDesc">Seu portal gamer.</p><div class="hero-actions"><button class="btn-p" onclick="event.stopPropagation();document.getElementById('newsSection').scrollIntoView({behavior:'smooth'})">🎮 EXPLORAR</button><button class="btn-s" onclick="event.stopPropagation();goToTrending()">🔥 EM ALTA</button></div></div></div></section>
 <div class="cats" id="catsStrip"></div>
-<section><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>RADAR GAMER</h2><span class="cnt" id="newsCount">0</span></div><a href="#" class="see-all">Ver todas →</a></div>
+<section id="newsSection"><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>RADAR GAMER</h2><span class="cnt" id="newsCount">0</span></div><a class="see-all" onclick="document.getElementById('newsSection').scrollIntoView({behavior:'smooth'})">Ver todas →</a></div>
 <div class="news-grid" id="newsGrid"></div><div class="empty-state" id="emptyNews" style="display:none"><span>📭</span><p>Nenhuma notícia publicada.</p></div></section>
-<section class="trending"><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>🔥 EM ALTA</h2></div></div><div class="t-list" id="trendingList"></div><div class="empty-state" id="emptyTrending" style="display:none"><span>📊</span><p>Matérias aparecerão aqui conforme forem visualizadas.</p></div></section>
+<section class="trending" id="trendingSection"><div class="sec-h"><div class="sec-t"><div class="bar"></div><h2>🔥 EM ALTA</h2></div></div><div class="t-list" id="trendingList"></div><div class="empty-state" id="emptyTrending" style="display:none"><span>📊</span><p>Matérias aparecerão aqui conforme forem visualizadas.</p></div></section>
 </main>
-<footer><div class="f-wrap"><div class="f-top"><div class="f-brand"><span class="logo">GG<span>.</span></span><p>Sua fonte definitiva de notícias gamer.</p></div><div class="f-links"><h4>Navegação</h4><a href="#">Início</a><a href="#">Notícias</a><a href="#">Análises</a></div><div class="f-links"><h4>Comunidade</h4><a href="#">Discord</a><a href="#">Fórum</a></div><div class="f-links"><h4>Suporte</h4><a href="#">Contato</a><a href="#">FAQ</a><a href="#">Termos</a></div></div><div class="f-bottom"><p>© 2024 GG - Global Games</p><div class="f-social"><a href="#">🐦</a><a href="#">📸</a><a href="#">🎬</a><a href="#">💬</a></div></div></div></footer></div>
+<footer><div class="f-wrap"><div class="f-top"><div class="f-brand"><span class="logo">GG<span>.</span></span><p>Sua fonte definitiva de notícias gamer.</p></div><div class="f-links"><h4>Navegação</h4><a onclick="goPage('home')" style="cursor:pointer">Início</a><a onclick="goToTrending()" style="cursor:pointer">🔥 Em Alta</a><a onclick="document.getElementById('newsSection').scrollIntoView({behavior:'smooth'})" style="cursor:pointer">Notícias</a></div><div class="f-links"><h4>Comunidade</h4><a href="#">Discord</a><a href="#">Fórum</a></div><div class="f-links"><h4>Suporte</h4><a href="#">Contato</a><a href="#">FAQ</a><a href="#">Termos</a></div></div><div class="f-bottom"><p>© 2024 GG - Global Games</p><div class="f-social"><a href="#">🐦</a><a href="#">📸</a><a href="#">🎬</a><a href="#">💬</a></div></div></div></footer></div>
 
 <!-- ARTICLE READER -->
 <div class="page" id="articlePage"><div class="article-reader" id="articleReader"></div></div>
@@ -392,6 +447,7 @@
 <a class="active" onclick="adminTab('overview',this)"><span class="an">📊</span>Visão Geral</a>
 <a onclick="adminTab('articles',this)"><span class="an">📰</span>Matérias</a>
 <a onclick="adminTab('new-article',this)"><span class="an">✏️</span>Nova Matéria</a>
+<a onclick="adminTab('comments',this)" id="commentsNavLink"><span class="an">💬</span>Comentários<span class="badge-count" id="pendingBadge" style="display:none">0</span></a>
 <a onclick="adminTab('categories',this)"><span class="an">📂</span>Categorias</a>
 <a onclick="adminTab('tags',this)"><span class="an">🏷️</span>Tags</a>
 <a onclick="adminTab('pages',this)"><span class="an">📄</span>Páginas</a>
@@ -437,7 +493,35 @@
 <div style="display:flex;gap:12px"><button class="a-btn" onclick="saveArticle()">💾 Salvar</button><button class="a-btn secondary" onclick="resetForm();adminTab('articles')">Cancelar</button></div>
 </div></div></div>
 
-<div class="admin-panel" id="ap-categories"><div class="admin-section"><h3>📂 Categorias</h3><div class="a-form" style="max-width:500px;margin-bottom:24px"><div class="a-row"><div class="a-field"><label>Nome</label><input type="text" id="catName" placeholder="E-Sports"></div><div class="a-field"><label>Ícone</label><input type="text" id="catIcon" placeholder="🏆"></div></div><div class="a-field"><label>Cor</label><select id="catColor"><option value="esports">Roxo</option><option value="lancamento">Verde</option><option value="analise">Azul</option><option value="atualizacao">Amarelo</option><option value="indie">Rosa</option><option value="hardware">Vermelho</option></select></div><button class="a-btn" onclick="saveCat()" style="width:fit-content">+ Adicionar</button></div><div id="catsList"></div></div></div>
+<!-- COMMENTS ADMIN PANEL -->
+<div class="admin-panel" id="ap-comments">
+<div class="admin-section">
+    <h3>💬 Aprovação de Comentários</h3>
+    <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+        <button class="chip active" id="filterPending" onclick="filterComments('pending',this)">⏳ Pendentes</button>
+        <button class="chip" id="filterApproved" onclick="filterComments('approved',this)">✅ Aprovados</button>
+        <button class="chip" id="filterAll" onclick="filterComments('all',this)">📋 Todos</button>
+    </div>
+    <div id="commentsAdminList"></div>
+</div>
+</div>
+
+<div class="admin-panel" id="ap-categories"><div class="admin-section"><h3>📂 Categorias</h3><div class="a-form" style="max-width:560px;margin-bottom:24px">
+<div class="a-row3">
+    <div class="a-field"><label>Nome</label><input type="text" id="catName" placeholder="Ex: RPG"></div>
+    <div class="a-field"><label>Ícone</label><input type="text" id="catIcon" placeholder="🏆"></div>
+    <div class="a-field"><label>Cor</label><select id="catColor"><option value="esports">Roxo</option><option value="lancamento">Verde</option><option value="analise">Azul</option><option value="atualizacao">Amarelo</option><option value="indie">Rosa</option><option value="hardware">Vermelho</option></select></div>
+</div>
+<div class="a-field"><label>Imagem da Categoria (opcional)</label>
+    <div class="img-upload-sm" id="catImgUp">
+        <input type="file" accept="image/*" onchange="imgUpSm(this,'catImgUp','catImgPrev')">
+        <img class="preview-img-sm" id="catImgPrev">
+        <button class="remove-img-sm" onclick="imgRmSm(event,'catImgUp','catImgPrev')">✕</button>
+        <div class="upload-text-sm"><span>📸</span>Imagem / ícone personalizado</div>
+    </div>
+</div>
+<button class="a-btn" onclick="saveCat()" style="width:fit-content">+ Adicionar Categoria</button>
+</div><div id="catsList"></div></div></div>
 
 <div class="admin-panel" id="ap-tags"><div class="admin-section"><h3>🏷️ Tags</h3><div class="a-form" style="max-width:400px;margin-bottom:24px"><div class="a-field"><label>Nova Tag</label><input type="text" id="newTagIn" placeholder="Tag..." onkeypress="if(event.key==='Enter')saveTagAdmin()"></div><button class="a-btn" onclick="saveTagAdmin()" style="width:fit-content">+ Adicionar</button></div><div id="tagsList" style="display:flex;flex-wrap:wrap;gap:8px"></div></div></div>
 
@@ -448,11 +532,19 @@
 
 <script>
 const GID='990622112342-63jj23kj8tv13m1qt770ojn0hqb2ib3v.apps.googleusercontent.com',ADMIN='ggglobalgamesgg@gmail.com';
-let cUser=null,isGuest=false,isAdm=false,artTags=[];
+let cUser=null,isGuest=false,isAdm=false,artTags=[],commentFilter='pending';
 const DB={g:(k,d)=>{try{return JSON.parse(localStorage.getItem('gg_'+k))||d}catch(e){return d}},s:(k,v)=>localStorage.setItem('gg_'+k,JSON.stringify(v)),d:k=>localStorage.removeItem('gg_'+k)};
 
 // INIT DB
-(function(){if(!DB.g('cats',null))DB.s('cats',[{id:1,name:'E-Sports',icon:'🏆',color:'esports'},{id:2,name:'Lançamento',icon:'🚀',color:'lancamento'},{id:3,name:'Análise',icon:'🎬',color:'analise'},{id:4,name:'Atualização',icon:'🔄',color:'atualizacao'},{id:5,name:'Indie',icon:'🕹️',color:'indie'},{id:6,name:'Hardware',icon:'💻',color:'hardware'}]);if(!DB.g('tags',null))DB.s('tags',['FPS','RPG','MOBA','Battle Royale','Ação','Aventura']);if(!DB.g('articles',null))DB.s('articles',[]);if(!DB.g('pages',null))DB.s('pages',[]);if(!DB.g('settings',null))DB.s('settings',{siteName:'GG.',siteDesc:'Portal Gamer',heroTitle:'BEM-VINDO AO GG.',heroDesc:'Seu portal gamer com as últimas novidades.',heroImage:''});if(!DB.g('views',null))DB.s('views',{})})();
+(function(){
+    if(!DB.g('cats',null))DB.s('cats',[{id:1,name:'E-Sports',icon:'🏆',color:'esports',image:''},{id:2,name:'Lançamento',icon:'🚀',color:'lancamento',image:''},{id:3,name:'Análise',icon:'🎬',color:'analise',image:''},{id:4,name:'Atualização',icon:'🔄',color:'atualizacao',image:''},{id:5,name:'Indie',icon:'🕹️',color:'indie',image:''},{id:6,name:'Hardware',icon:'💻',color:'hardware',image:''}]);
+    if(!DB.g('tags',null))DB.s('tags',['FPS','RPG','MOBA','Battle Royale','Ação','Aventura']);
+    if(!DB.g('articles',null))DB.s('articles',[]);
+    if(!DB.g('pages',null))DB.s('pages',[]);
+    if(!DB.g('settings',null))DB.s('settings',{siteName:'GG.',siteDesc:'Portal Gamer',heroTitle:'BEM-VINDO AO GG.',heroDesc:'Seu portal gamer com as últimas novidades.',heroImage:''});
+    if(!DB.g('views',null))DB.s('views',{});
+    if(!DB.g('comments',null))DB.s('comments',[]);
+})();
 
 // PARTICLES
 (function(){const c=document.getElementById('particles');for(let i=0;i<20;i++){const p=document.createElement('div');p.classList.add('particle');p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*15+10)+'s';p.style.animationDelay=(Math.random()*15)+'s';const s=(Math.random()*3+1)+'px';p.style.width=s;p.style.height=s;if(Math.random()>.5)p.style.background='#10b981';c.appendChild(p)}})();
@@ -473,34 +565,59 @@ function goLogin(){closeDD();closeMob();document.querySelectorAll('.page').forEa
 function mobAuthAction(){closeMob();cUser?logout():goLogin()}
 function avH(u){return u&&u.picture?`<img src="${u.picture}" referrerpolicy="no-referrer">`:(u&&u.name||'G').charAt(0).toUpperCase()}
 
-function uiUser(u){const a=avH(u);document.getElementById('uAvatar').innerHTML=a;document.getElementById('uName').textContent=u.name;const r=document.getElementById('uRole');r.textContent='🎮 Membro';r.className='u-role member';document.getElementById('ddAv').innerHTML=a;document.getElementById('ddN').textContent=u.name;document.getElementById('ddE').textContent=u.email;document.getElementById('ddAuth').innerHTML='<button class="dd-out" onclick="logout()">🚪 Sair</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.remove('show');document.querySelectorAll('.restricted').forEach(e=>e.classList.remove('show'));const m=document.getElementById('mobAuth');m.textContent='🚪 Sair';m.style.color='#ef4444';m.onclick=()=>{closeMob();logout()}}
-function uiAdmin(u){uiUser(u);const r=document.getElementById('uRole');r.textContent='👑 Admin';r.className='u-role admin';document.getElementById('ddAdminLink').innerHTML='<a class="dd-admin" onclick="goPage(\'admin\')">⚙️ Admin</a>';document.getElementById('navAdminLink').style.display='';document.getElementById('mobAdminLink').style.display=''}
+function uiUser(u){const a=avH(u);document.getElementById('uAvatar').innerHTML=a;document.getElementById('uName').textContent=u.name;const r=document.getElementById('uRole');r.textContent='🎮 Membro';r.className='u-role member';document.getElementById('ddAv').innerHTML=a;document.getElementById('ddN').textContent=u.name;document.getElementById('ddE').textContent=u.email;document.getElementById('ddAuth').innerHTML='<button class="dd-out" onclick="logout()">🚪 Sair</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.remove('show');document.querySelectorAll('.restricted').forEach(e=>e.classList.remove('show'));const m=document.getElementById('mobAuth');m.textContent='🚪 Sair';m.style.color='#ef4444';m.onclick=()=>{closeMob();logout()};updateNotifBadge()}
+function uiAdmin(u){uiUser(u);const r=document.getElementById('uRole');r.textContent='👑 Admin';r.className='u-role admin';document.getElementById('ddAdminLink').innerHTML='<a class="dd-admin" onclick="goPage(\'admin\')">⚙️ Admin</a>';document.getElementById('navAdminLink').style.display='';document.getElementById('mobAdminLink').style.display='';updateNotifBadge()}
 function uiGuest(){document.getElementById('uAvatar').innerHTML='👁️';document.getElementById('uName').textContent='Visitante';const r=document.getElementById('uRole');r.textContent='👁️ Visitante';r.className='u-role guest';document.getElementById('ddAv').innerHTML='👁️';document.getElementById('ddN').textContent='Visitante';document.getElementById('ddE').textContent='Não logado';document.getElementById('ddAuth').innerHTML='<button class="dd-in" onclick="goLogin()">🔑 Login</button>';document.getElementById('ddAdminLink').innerHTML='';document.getElementById('navAdminLink').style.display='none';document.getElementById('mobAdminLink').style.display='none';document.getElementById('vBanner').classList.add('show');const m=document.getElementById('mobAuth');m.textContent='🔑 Login';m.style.color='#10b981';m.onclick=()=>{closeMob();goLogin()}}
 
 // NAV
-function goPage(p){closeMob();closeDD();document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));if(p==='home')document.getElementById('homePage').classList.add('active');else if(p==='admin'&&isAdm){document.getElementById('adminPage').classList.add('active');refreshAdmin()}else if(p==='article')document.getElementById('articlePage').classList.add('active');else document.getElementById('homePage').classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function goPage(p){closeMob();closeDD();document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));if(p==='home'){document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active')}else if(p==='admin'&&isAdm){document.getElementById('adminPage').classList.add('active');refreshAdmin()}else if(p==='article'){document.getElementById('articlePage').classList.add('active')}else{document.getElementById('homePage').classList.add('active');document.getElementById('navHome').classList.add('active')}window.scrollTo({top:0,behavior:'smooth'})}
+
+function goToTrending(){
+    const isHome=document.getElementById('homePage').classList.contains('active');
+    if(!isHome){goPage('home');setTimeout(()=>{document.getElementById('trendingSection').scrollIntoView({behavior:'smooth',block:'start'})},200)}
+    else{document.getElementById('trendingSection').scrollIntoView({behavior:'smooth',block:'start'})}
+    document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'));
+    document.getElementById('navTrending').classList.add('active');
+}
 
 // VIEWS SYSTEM
-function addView(id){const v=DB.g('views',{});const key='v_'+id;const viewed=DB.g('viewed_'+id,false);if(!viewed){v[id]=(v[id]||0)+1;DB.s('views',v);DB.s('viewed_'+id,true)}return v[id]||0}
+function addView(id){const v=DB.g('views',{});const viewed=DB.g('viewed_'+id,false);if(!viewed){v[id]=(v[id]||0)+1;DB.s('views',v);DB.s('viewed_'+id,true)}return v[id]||0}
 function getViews(id){return DB.g('views',{})[id]||0}
 function getTotalViews(){const v=DB.g('views',{});return Object.values(v).reduce((a,b)=>a+b,0)}
 function formatNum(n){if(n>=1000000)return(n/1000000).toFixed(1)+'M';if(n>=1000)return(n/1000).toFixed(1)+'k';return n}
 
 // RENDER
-function render(){renderCats();renderNews();renderTrending();renderHero();updateStats()}
+function render(){renderCats();renderNews();renderTrending();renderHero();updateStats();updateNotifBadge()}
 
-function renderCats(){const cats=DB.g('cats',[]);document.getElementById('catsStrip').innerHTML='<div class="chip active">🔥 Todos</div>'+cats.map(c=>`<div class="chip">${c.icon} ${c.name}</div>`).join('');document.querySelectorAll('#catsStrip .chip').forEach(ch=>ch.addEventListener('click',()=>{document.querySelectorAll('#catsStrip .chip').forEach(x=>x.classList.remove('active'));ch.classList.add('active')}))}
+function renderCats(){
+    const cats=DB.g('cats',[]);
+    document.getElementById('catsStrip').innerHTML='<div class="chip active" onclick="filterByCategory(null,this)">🔥 Todos</div>'+cats.map(c=>{
+        const imgPart=c.image?`<img class="chip-img" src="${c.image}">`:`${c.icon}`;
+        return`<div class="chip" onclick="filterByCategory(${c.id},this)">${imgPart} ${c.name}</div>`
+    }).join('');
+}
+
+let activeCategory=null;
+function filterByCategory(catId,el){
+    activeCategory=catId;
+    document.querySelectorAll('#catsStrip .chip').forEach(x=>x.classList.remove('active'));
+    el.classList.add('active');
+    renderNews();
+}
 
 function renderNews(){
-    const arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);const cats=DB.g('cats',[]);const grid=document.getElementById('newsGrid');
-    document.getElementById('newsCount').textContent=arts.length;document.getElementById('statArticles').textContent=arts.length;document.getElementById('statViews').textContent=formatNum(getTotalViews());
+    let arts=DB.g('articles',[]).filter(a=>a.status==='published').sort((a,b)=>b.id-a.id);
+    if(activeCategory)arts=arts.filter(a=>a.categoryId==activeCategory);
+    const cats=DB.g('cats',[]);const grid=document.getElementById('newsGrid');
+    document.getElementById('newsCount').textContent=arts.length;document.getElementById('statArticles').textContent=DB.g('articles',[]).filter(a=>a.status==='published').length;document.getElementById('statViews').textContent=formatNum(getTotalViews());
     if(!arts.length){grid.innerHTML='';document.getElementById('emptyNews').style.display='block';return}
     document.getElementById('emptyNews').style.display='none';
     grid.innerHTML=arts.map((a,i)=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',color:'esports',icon:'📰'};const views=getViews(a.id);
-    const img=a.coverImage?`<img src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple">${cat.icon}</div>`;
+    const img=a.coverImage?`<img class="cover-img" src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple">${cat.icon}</div>`;
     const tags=a.tags&&a.tags.length?`<div class="n-tags">${a.tags.slice(0,3).map(t=>`<span class="n-tag">${t}</span>`).join('')}</div>`:'';
     const restr=isGuest&&i>=3?`<div class="restricted show"><span class="ri">🔒</span><p>Exclusivo</p><button class="rb" onclick="event.stopPropagation();goLogin()">Login</button></div>`:'';
-    return`<article class="n-card" onclick="openArticle(${a.id})">${restr}<div class="n-img">${img}<span class="n-cat ${cat.color}">${cat.name}</span><span class="n-time">${a.readTime||'3 min'}</span>${views?`<span class="n-views">👁️ ${formatNum(views)}</span>`:''}</div><div class="n-body"><h3 class="n-title">${a.title}</h3><p class="n-excerpt">${a.excerpt||''}</p><div class="n-footer"><div class="n-author"><div class="n-author-av">${(a.author||'R').charAt(0)}</div><div><span class="n-author-name">${a.author||'Redação'}</span><br><span class="n-date">${timeAgo(a.id)}</span></div></div><div class="n-engage"><span>👁️ ${formatNum(views)}</span></div></div>${tags}</div></article>`}).join('');
+    const commCount=DB.g('comments',[]).filter(c=>c.articleId===a.id&&c.approved).length;
+    return`<article class="n-card" onclick="openArticle(${a.id})">${restr}<div class="n-img">${img}<span class="n-cat ${cat.color}">${cat.name}</span><span class="n-time">${a.readTime||'3 min'}</span>${views?`<span class="n-views">👁️ ${formatNum(views)}</span>`:''}</div><div class="n-body"><h3 class="n-title">${a.title}</h3><p class="n-excerpt">${a.excerpt||''}</p><div class="n-footer"><div class="n-author"><div class="n-author-av">${(a.author||'R').charAt(0)}</div><div><span class="n-author-name">${a.author||'Redação'}</span><br><span class="n-date">${timeAgo(a.id)}</span></div></div><div class="n-engage"><span>👁️ ${formatNum(views)}</span>${commCount?`<span>💬 ${commCount}</span>`:''}</div></div>${tags}</div></article>`}).join('');
 }
 
 function renderTrending(){
@@ -527,6 +644,7 @@ function openArticle(id){
     const coverHTML=a.coverImage?`<img src="${a.coverImage}" alt="${a.title}">`:`<div class="ph purple" style="font-size:80px">${cat.icon}</div>`;
     const contentImgHTML=a.contentImage?`<div class="ar-content-img"><img src="${a.contentImage}" alt=""></div>`:'';
     const tagsHTML=a.tags&&a.tags.length?`<div class="ar-tags">${a.tags.map(t=>`<span class="ar-tag">${t}</span>`).join('')}</div>`:'';
+    const commentsHTML=renderCommentsSection(id);
     
     document.getElementById('articleReader').innerHTML=`
     <button class="ar-back" onclick="goPage('home')">← Voltar</button>
@@ -544,22 +662,166 @@ function openArticle(id){
     ${a.excerpt?`<p class="ar-excerpt">${a.excerpt}</p>`:''}
     <div class="ar-content">${a.content||'<p>Sem conteúdo.</p>'}</div>
     ${contentImgHTML}${tagsHTML}
-    <div class="ar-author-box"><div class="ar-author-av">${(a.author||'R').charAt(0)}</div><div><div class="ar-author-name">${a.author||'Redação GG'}</div><div class="ar-author-role">Redator · GG. Global Games</div></div></div>`;
+    <div class="ar-author-box"><div class="ar-author-av">${(a.author||'R').charAt(0)}</div><div><div class="ar-author-name">${a.author||'Redação GG'}</div><div class="ar-author-role">Redator · GG. Global Games</div></div></div>
+    ${commentsHTML}`;
     
+    // bind comment form
+    bindCommentForm(id);
     goPage('article');renderNews();renderTrending();
+}
+
+// ===== COMMENTS =====
+function renderCommentsSection(articleId){
+    const approved=DB.g('comments',[]).filter(c=>c.articleId===articleId&&c.approved).sort((a,b)=>b.id-a.id);
+    const formHTML=buildCommentForm(articleId);
+    const listHTML=approved.length
+        ?approved.map(c=>commentItemHTML(c)).join('')
+        :`<div class="no-comments"><span>💬</span><p>Nenhum comentário aprovado ainda. Seja o primeiro!</p></div>`;
+    return`<div class="comments-section">
+        <div class="comments-title">💬 Comentários <span style="font-size:16px;color:var(--tm);font-family:'Inter',sans-serif;font-weight:500">(${approved.length})</span></div>
+        <p class="comments-subtitle">Os comentários são moderados antes de aparecerem.</p>
+        ${formHTML}
+        <div id="commentsListReader">${listHTML}</div>
+    </div>`;
+}
+
+function commentItemHTML(c){
+    const avHTML=c.authorPicture?`<img src="${c.authorPicture}" referrerpolicy="no-referrer">`:(c.authorName||'?').charAt(0).toUpperCase();
+    return`<div class="comment-item">
+        <div class="comment-header">
+            <div class="comment-author">
+                <div class="comment-av">${avHTML}</div>
+                <div><div class="comment-name">${escHtml(c.authorName)}</div><div class="comment-time">${timeAgo(c.id)}</div></div>
+            </div>
+        </div>
+        <p class="comment-text">${escHtml(c.text)}</p>
+    </div>`;
+}
+
+function buildCommentForm(articleId){
+    if(isGuest){
+        return`<div class="comment-guest-notice">
+            <p>🔑 Faça login para deixar um comentário!</p>
+            <button onclick="goLogin()">Fazer Login</button>
+        </div>`;
+    }
+    return`<div class="comment-form">
+        <h4>✍️ Deixe seu comentário</h4>
+        <textarea class="comment-input" id="commentText" placeholder="Escreva seu comentário..."></textarea>
+        <button class="comment-submit" onclick="submitComment(${articleId})">💬 Enviar Comentário</button>
+        <div class="comment-pending-notice" id="commentPendingNotice">⏳ Comentário enviado! Aguardando aprovação do administrador.</div>
+    </div>`;
+}
+
+function bindCommentForm(articleId){
+    // nothing to bind additionally — all inline
+}
+
+function submitComment(articleId){
+    if(!cUser){goLogin();return}
+    const textarea=document.getElementById('commentText');
+    const text=textarea.value.trim();
+    if(!text){toast('Escreva algo!','error');return}
+    if(text.length<3){toast('Comentário muito curto!','error');return}
+    const comments=DB.g('comments',[]);
+    comments.push({
+        id:Date.now(),
+        articleId,
+        authorName:cUser.name,
+        authorEmail:cUser.email,
+        authorPicture:cUser.picture||null,
+        text,
+        approved:false,
+        timestamp:Date.now()
+    });
+    DB.s('comments',comments);
+    textarea.value='';
+    const notice=document.getElementById('commentPendingNotice');
+    if(notice){notice.classList.add('show');setTimeout(()=>notice.classList.remove('show'),5000)}
+    updateNotifBadge();
+    updatePendingBadge();
+}
+
+function escHtml(str){const d=document.createElement('div');d.textContent=str||'';return d.innerHTML}
+
+// COMMENT MODERATION
+function updateNotifBadge(){
+    if(!isAdm)return;
+    const pending=DB.g('comments',[]).filter(c=>!c.approved&&!c.rejected).length;
+    const badge=document.getElementById('notifBadge');
+    if(pending>0){badge.textContent=pending;badge.style.display='flex'}
+    else badge.style.display='none';
+}
+function updatePendingBadge(){
+    const pending=DB.g('comments',[]).filter(c=>!c.approved&&!c.rejected).length;
+    const badge=document.getElementById('pendingBadge');
+    if(badge){if(pending>0){badge.textContent=pending;badge.style.display='inline-block'}else badge.style.display='none'}
+}
+function checkAdminNotif(){if(isAdm){goPage('admin');adminTab('comments',document.getElementById('commentsNavLink'))}}
+
+function filterComments(filter,el){
+    commentFilter=filter;
+    document.querySelectorAll('#ap-comments .chip').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    renderCommentsAdmin();
+}
+
+function renderCommentsAdmin(){
+    const all=DB.g('comments',[]);
+    const arts=DB.g('articles',[]);
+    let filtered;
+    if(commentFilter==='pending')filtered=all.filter(c=>!c.approved&&!c.rejected);
+    else if(commentFilter==='approved')filtered=all.filter(c=>c.approved);
+    else filtered=all;
+    filtered=filtered.sort((a,b)=>b.id-a.id);
+    updatePendingBadge();
+    if(!filtered.length){
+        document.getElementById('commentsAdminList').innerHTML='<div class="empty-state"><span>💬</span><p>Nenhum comentário aqui.</p></div>';return}
+    const html=`<table class="a-table"><thead><tr><th>Autor</th><th>Matéria</th><th>Comentário</th><th>Status</th><th>Ações</th></tr></thead><tbody>${filtered.map(c=>{
+        const art=arts.find(a=>a.id===c.articleId);
+        const status=c.approved?'approved':c.rejected?'rejected':'pending';
+        const statusLabel=c.approved?'✅ Aprovado':c.rejected?'❌ Rejeitado':'⏳ Pendente';
+        const avHTML=c.authorPicture?`<img src="${c.authorPicture}" style="width:32px;height:32px;border-radius:8px;object-fit:cover" referrerpolicy="no-referrer">`:`<div style="width:32px;height:32px;border-radius:8px;background:var(--gp);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">${(c.authorName||'?').charAt(0)}</div>`;
+        let actions='';
+        if(!c.approved&&!c.rejected)actions=`<button class="approve" onclick="approveComment(${c.id})">✅ Aprovar</button><button class="del" onclick="rejectComment(${c.id})">❌ Rejeitar</button>`;
+        else if(c.approved)actions=`<button class="del" onclick="deleteComment(${c.id})">🗑️ Remover</button>`;
+        else actions=`<button class="approve" onclick="approveComment(${c.id})">↩️ Reativar</button><button class="del" onclick="deleteComment(${c.id})">🗑️ Remover</button>`;
+        return`<tr><td><div style="display:flex;align-items:center;gap:8px">${avHTML}<div><strong style="font-size:13px">${escHtml(c.authorName)}</strong><br><span style="font-size:11px;color:var(--tm)">${timeAgo(c.id)}</span></div></div></td><td style="max-width:140px;font-size:13px">${art?art.title:'Matéria removida'}</td><td style="max-width:200px"><p style="font-size:13px;color:var(--ts);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${escHtml(c.text)}</p></td><td><span class="status ${status}">${statusLabel}</span></td><td><div class="actions">${actions}</div></td></tr>`
+    }).join('')}</tbody></table>`;
+    document.getElementById('commentsAdminList').innerHTML=html;
+}
+
+function approveComment(id){
+    const cs=DB.g('comments',[]);const idx=cs.findIndex(c=>c.id===id);if(idx<0)return;
+    cs[idx].approved=true;cs[idx].rejected=false;DB.s('comments',cs);
+    toast('Comentário aprovado! ✅','success');renderCommentsAdmin();updateNotifBadge();
+}
+function rejectComment(id){
+    const cs=DB.g('comments',[]);const idx=cs.findIndex(c=>c.id===id);if(idx<0)return;
+    cs[idx].approved=false;cs[idx].rejected=true;DB.s('comments',cs);
+    toast('Comentário rejeitado.','info');renderCommentsAdmin();updateNotifBadge();
+}
+function deleteComment(id){
+    if(!confirm('Deletar permanentemente?'))return;
+    DB.s('comments',DB.g('comments',[]).filter(c=>c.id!==id));
+    toast('Removido.','info');renderCommentsAdmin();updateNotifBadge();
 }
 
 function timeAgo(ts){const d=Date.now()-ts;const m=Math.floor(d/60000);if(m<1)return'Agora';if(m<60)return`${m} min`;const h=Math.floor(m/60);if(h<24)return`${h}h`;return`${Math.floor(h/24)}d`}
 
 // ADMIN
-function adminTab(tab,el){document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));document.getElementById('ap-'+tab)?.classList.add('active');document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));if(el)el.classList.add('active');if(tab==='new-article'){resetForm();loadCatSel()}if(tab==='articles')renderArtTable();if(tab==='categories')renderCatsAdmin();if(tab==='tags')renderTagsAdmin();if(tab==='pages')renderPgAdmin();if(tab==='settings')loadSettings();if(tab==='overview')refreshAdmin()}
-function refreshAdmin(){updateStats();renderOverview();loadCatSel()}
+function adminTab(tab,el){document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));document.getElementById('ap-'+tab)?.classList.add('active');document.querySelectorAll('.admin-nav a').forEach(a=>a.classList.remove('active'));if(el)el.classList.add('active');if(tab==='new-article'){resetForm();loadCatSel()}if(tab==='articles')renderArtTable();if(tab==='categories')renderCatsAdmin();if(tab==='tags')renderTagsAdmin();if(tab==='pages')renderPgAdmin();if(tab==='settings')loadSettings();if(tab==='overview')refreshAdmin();if(tab==='comments'){commentFilter='pending';document.querySelectorAll('#ap-comments .chip').forEach(c=>c.classList.remove('active'));document.getElementById('filterPending').classList.add('active');renderCommentsAdmin()}}
+function refreshAdmin(){updateStats();renderOverview();loadCatSel();updateNotifBadge();updatePendingBadge()}
 function updateStats(){document.getElementById('aStatArt').textContent=DB.g('articles',[]).length;document.getElementById('aStatCat').textContent=DB.g('cats',[]).length;document.getElementById('aStatTag').textContent=DB.g('tags',[]).length;document.getElementById('aStatViews').textContent=formatNum(getTotalViews())}
 function loadCatSel(){document.getElementById('artCat').innerHTML=DB.g('cats',[]).map(c=>`<option value="${c.id}">${c.icon} ${c.name}</option>`).join('')}
 
 // IMAGES
 function imgUp(input,wId,pId){const f=input.files[0];if(!f)return;if(f.size>5*1024*1024){toast('Max 5MB!','error');return}const r=new FileReader();r.onload=e=>{document.getElementById(pId).src=e.target.result;document.getElementById(wId).classList.add('has-image')};r.readAsDataURL(f)}
 function imgRm(e,wId,pId){e.stopPropagation();e.preventDefault();document.getElementById(pId).src='';document.getElementById(wId).classList.remove('has-image');document.querySelector('#'+wId+' input').value=''}
+
+// CATEGORY IMAGE UPLOAD (sm)
+function imgUpSm(input,wId,pId){const f=input.files[0];if(!f)return;if(f.size>2*1024*1024){toast('Max 2MB!','error');return}const r=new FileReader();r.onload=e=>{document.getElementById(pId).src=e.target.result;document.getElementById(wId).classList.add('has-image')};r.readAsDataURL(f)}
+function imgRmSm(e,wId,pId){e.stopPropagation();e.preventDefault();document.getElementById(pId).src='';document.getElementById(wId).classList.remove('has-image');document.querySelector('#'+wId+' input[type="file"]').value=''}
 
 // RICH EDITOR
 function execCmd(cmd,val){document.execCommand(cmd,false,val||null);document.getElementById('editorArea').focus()}
@@ -575,13 +837,29 @@ function saveArticle(){const title=document.getElementById('artTitle').value.tri
 function editArt(id){const a=DB.g('articles',[]).find(x=>x.id===id);if(!a)return;adminTab('new-article');document.getElementById('artFormTitle').textContent='Editar Matéria';document.getElementById('editId').value=a.id;document.getElementById('artTitle').value=a.title;document.getElementById('artExcerpt').value=a.excerpt||'';document.getElementById('artStatus').value=a.status;document.getElementById('editorArea').innerHTML=a.content||'';document.getElementById('artAuthor').value=a.author||'';document.getElementById('artRead').value=a.readTime||'';if(a.coverImage){document.getElementById('coverPrev').src=a.coverImage;document.getElementById('coverUp').classList.add('has-image')}if(a.contentImage){document.getElementById('extraPrev').src=a.contentImage;document.getElementById('extraUp').classList.add('has-image')}artTags=a.tags||[];renderATags();loadCatSel();document.getElementById('artCat').value=a.categoryId}
 function delArt(id){if(!confirm('Deletar?'))return;DB.s('articles',DB.g('articles',[]).filter(a=>a.id!==id));toast('Deletada.','info');renderArtTable();render();refreshAdmin()}
 
-function renderArtTable(){const arts=DB.g('articles',[]).sort((a,b)=>b.id-a.id),cats=DB.g('cats',[]);document.getElementById('articlesTable').innerHTML=arts.length?`<table class="a-table"><thead><tr><th></th><th>Título</th><th>Cat</th><th>Views</th><th>Status</th><th>Ações</th></tr></thead><tbody>${arts.map(a=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',icon:'📰'};const th=a.coverImage?`<img class="thumb" src="${a.coverImage}">`:`<div class="thumb-ph">${cat.icon}</div>`;return`<tr><td>${th}</td><td><strong>${a.title}</strong></td><td>${cat.icon} ${cat.name}</td><td>👁️ ${formatNum(getViews(a.id))}</td><td><span class="status ${a.status}">${a.status==='published'?'Pub':'Draft'}</span></td><td><div class="actions"><button onclick="editArt(${a.id})">✏️</button><button class="del" onclick="delArt(${a.id})">🗑️</button></div></td></tr>`}).join('')}</tbody></table>`:'<div class="empty-state"><span>📭</span><p>Nenhuma matéria.</p></div>'}
+function renderArtTable(){const arts=DB.g('articles',[]).sort((a,b)=>b.id-a.id),cats=DB.g('cats',[]);document.getElementById('articlesTable').innerHTML=arts.length?`<table class="a-table"><thead><tr><th></th><th>Título</th><th>Cat</th><th>Views</th><th>Coment.</th><th>Status</th><th>Ações</th></tr></thead><tbody>${arts.map(a=>{const cat=cats.find(c=>c.id==a.categoryId)||{name:'Geral',icon:'📰'};const th=a.coverImage?`<img class="thumb" src="${a.coverImage}">`:`<div class="thumb-ph">${cat.icon}</div>`;const commCount=DB.g('comments',[]).filter(c=>c.articleId===a.id&&c.approved).length;return`<tr><td>${th}</td><td><strong>${a.title}</strong></td><td>${cat.icon} ${cat.name}</td><td>👁️ ${formatNum(getViews(a.id))}</td><td>💬 ${commCount}</td><td><span class="status ${a.status}">${a.status==='published'?'Pub':'Draft'}</span></td><td><div class="actions"><button onclick="editArt(${a.id})">✏️</button><button class="del" onclick="delArt(${a.id})">🗑️</button></div></td></tr>`}).join('')}</tbody></table>`:'<div class="empty-state"><span>📭</span><p>Nenhuma matéria.</p></div>'}
 function renderOverview(){const arts=DB.g('articles',[]).sort((a,b)=>b.id-a.id).slice(0,5),cats=DB.g('cats',[]);document.getElementById('overviewTable').innerHTML=arts.length?`<table class="a-table"><thead><tr><th></th><th>Título</th><th>Views</th><th>Status</th></tr></thead><tbody>${arts.map(a=>{const cat=cats.find(c=>c.id==a.categoryId)||{icon:'📰'};const th=a.coverImage?`<img class="thumb" src="${a.coverImage}">`:`<div class="thumb-ph">${cat.icon}</div>`;return`<tr><td>${th}</td><td>${a.title}</td><td>👁️ ${formatNum(getViews(a.id))}</td><td><span class="status ${a.status}">${a.status==='published'?'Pub':'Draft'}</span></td></tr>`}).join('')}</tbody></table>`:'<div class="empty-state"><span>📭</span><p>Crie sua primeira matéria!</p></div>'}
 
 // CATS ADMIN
-function saveCat(){const n=document.getElementById('catName').value.trim();if(!n){toast('Nome!','error');return}const cats=DB.g('cats',[]);cats.push({id:Date.now(),name:n,icon:document.getElementById('catIcon').value||'📂',color:document.getElementById('catColor').value});DB.s('cats',cats);document.getElementById('catName').value='';document.getElementById('catIcon').value='';toast('Criada! 📂','success');renderCatsAdmin();render();updateStats()}
+function saveCat(){
+    const n=document.getElementById('catName').value.trim();if(!n){toast('Nome!','error');return}
+    const cats=DB.g('cats',[]);
+    const imgSrc=document.getElementById('catImgPrev').src||'';
+    cats.push({id:Date.now(),name:n,icon:document.getElementById('catIcon').value||'📂',color:document.getElementById('catColor').value,image:imgSrc&&imgSrc.startsWith('data:')?imgSrc:''});
+    DB.s('cats',cats);
+    document.getElementById('catName').value='';document.getElementById('catIcon').value='';
+    // reset cat img
+    document.getElementById('catImgPrev').src='';document.getElementById('catImgUp').classList.remove('has-image');
+    toast('Criada! 📂','success');renderCatsAdmin();render();updateStats()
+}
 function delCat(id){if(!confirm('Deletar?'))return;DB.s('cats',DB.g('cats',[]).filter(c=>c.id!==id));toast('Deletada.','info');renderCatsAdmin();render();updateStats()}
-function renderCatsAdmin(){const cats=DB.g('cats',[]);document.getElementById('catsList').innerHTML=`<table class="a-table"><thead><tr><th>Ícone</th><th>Nome</th><th>Cor</th><th></th></tr></thead><tbody>${cats.map(c=>`<tr><td>${c.icon}</td><td>${c.name}</td><td><span class="n-cat ${c.color}" style="position:static">${c.color}</span></td><td><div class="actions"><button class="del" onclick="delCat(${c.id})">🗑️</button></div></td></tr>`).join('')}</tbody></table>`}
+function renderCatsAdmin(){
+    const cats=DB.g('cats',[]);
+    document.getElementById('catsList').innerHTML=`<table class="a-table"><thead><tr><th>Imagem/Ícone</th><th>Nome</th><th>Cor</th><th></th></tr></thead><tbody>${cats.map(c=>{
+        const thumb=c.image?`<img src="${c.image}" style="width:40px;height:40px;border-radius:8px;object-fit:cover">`:`<span style="font-size:28px">${c.icon}</span>`;
+        return`<tr><td>${thumb}</td><td><strong>${c.name}</strong></td><td><span class="n-cat ${c.color}" style="position:static">${c.color}</span></td><td><div class="actions"><button class="del" onclick="delCat(${c.id})">🗑️</button></div></td></tr>`
+    }).join('')}</tbody></table>`
+}
 
 // TAGS ADMIN
 function saveTagAdmin(){const v=document.getElementById('newTagIn').value.trim();if(!v)return;const tags=DB.g('tags',[]);if(tags.includes(v)){toast('Já existe!','error');return}tags.push(v);DB.s('tags',tags);document.getElementById('newTagIn').value='';toast('Tag criada! 🏷️','success');renderTagsAdmin();updateStats()}
@@ -597,7 +875,7 @@ function renderPgAdmin(){const pgs=DB.g('pages',[]);document.getElementById('pgL
 function loadSettings(){const s=DB.g('settings',{});document.getElementById('setName').value=s.siteName||'';document.getElementById('setDesc').value=s.siteDesc||'';document.getElementById('setHeroT').value=s.heroTitle||'';document.getElementById('setHeroD').value=s.heroDesc||'';if(s.heroImage){document.getElementById('heroPrev').src=s.heroImage;document.getElementById('heroUp').classList.add('has-image')}}
 function saveSettings(){DB.s('settings',{siteName:document.getElementById('setName').value,siteDesc:document.getElementById('setDesc').value,heroTitle:document.getElementById('setHeroT').value,heroDesc:document.getElementById('setHeroD').value,heroImage:document.getElementById('heroPrev').src||''});toast('Salvo! ⚙️','success');renderHero()}
 
-// UI
+// UI UTILS
 window.addEventListener('scroll',()=>document.getElementById('header').classList.toggle('scrolled',window.scrollY>20));
 function toggleDD(){document.getElementById('uDD').classList.toggle('show')}
 function closeDD(){document.getElementById('uDD').classList.remove('show')}
