@@ -985,58 +985,6 @@ function updatePendingBadge(){
     const badge=document.getElementById('pendingBadge');
     if(badge){if(pending>0){badge.textContent=pending;badge.style.display='inline-block'}else badge.style.display='none'}
 }
-function checkMigration(){
-    if(!window._fbReady)return;
-    const keys=['articles','cats','tags','settings','comments','views','pages'];
-    let hasLocal=false;
-    for(const k of keys){
-        try{const v=localStorage.getItem('gg_'+k);if(v){const parsed=JSON.parse(v);if(Array.isArray(parsed)&&parsed.length>0){hasLocal=true;break}if(k==='articles'&&parsed&&parsed.length>0){hasLocal=true;break}}}catch(e){}
-    }
-    // Check specifically for articles
-    try{const arts=JSON.parse(localStorage.getItem('gg_articles')||'[]');if(arts.length>0)hasLocal=true;}catch(e){}
-    const box=document.getElementById('migrationBox');
-    if(box)box.style.display=hasLocal?'block':'none';
-}
-
-async function runMigration(){
-    if(!window._fbReady){toast('Firebase não conectado!','error');return}
-    const btn=document.querySelector('#migrationBox button');
-    const status=document.getElementById('migrationStatus');
-    btn.textContent='⏳ Migrando...';btn.disabled=true;
-    status.style.display='block';status.textContent='Lendo dados locais...';
-    const keys=['articles','cats','tags','settings','comments','views','pages'];
-    let count=0;
-    try{
-        const db=firebase.database();
-        for(const k of keys){
-            try{
-                const raw=localStorage.getItem('gg_'+k);
-                if(!raw)continue;
-                const val=JSON.parse(raw);
-                const isEmpty=Array.isArray(val)&&val.length===0;
-                if(isEmpty)continue;
-                status.textContent=`Enviando ${k}...`;
-                await db.ref(k).set(val);
-                cache[k]=val;
-                count++;
-            }catch(e){console.warn('Skip',k,e)}
-        }
-        // Also migrate views
-        try{
-            const vRaw=localStorage.getItem('gg_views');
-            if(vRaw){const v=JSON.parse(vRaw);await db.ref('views').set(v);cache['views']=v;count++;}
-        }catch(e){}
-        status.innerHTML=`<span style="color:#10b981">✅ Migração concluída! ${count} conjuntos de dados enviados ao Firebase.</span>`;
-        btn.textContent='✅ Concluído!';
-        toast('Matérias migradas com sucesso! 🎉','success');
-        setTimeout(()=>{document.getElementById('migrationBox').style.display='none';render();refreshAdmin();},3000);
-    }catch(err){
-        status.innerHTML=`<span style="color:#ef4444">❌ Erro: ${err.message}</span>`;
-        btn.textContent='🚀 Tentar novamente';btn.disabled=false;
-        toast('Erro na migração','error');
-    }
-}
-
 function filterComments(filter,el){
     commentFilter=filter;
     document.querySelectorAll('#ap-comments .chip').forEach(c=>c.classList.remove('active'));
