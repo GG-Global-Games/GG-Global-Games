@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GG. - Global Games</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
@@ -381,6 +383,7 @@
         .toast.info{background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.3);color:#93c5fd}
         @keyframes tIn{from{transform:translateX(100px);opacity:0}to{transform:translateX(0);opacity:1}}
         @keyframes tOut{from{opacity:1}to{opacity:0;transform:translateX(100px)}}
+        @keyframes loadBar{0%{width:0%;margin-left:0}50%{width:100%}100%{width:0%;margin-left:100%}}
 
         @media(max-width:1024px){.nav{display:none}.mob-btn{display:flex}.hero-stats{display:none}.hero-title{font-size:36px}.hero-content{padding:32px}.f-top{grid-template-columns:1fr 1fr}.admin-stats{grid-template-columns:repeat(2,1fr)}.admin-layout{grid-template-columns:1fr}.admin-side{display:none}}
         @media(max-width:768px){.h-bar{height:64px;padding:0 16px}.search-box{display:none}.u-info{display:none}main{padding:80px 16px 24px}.hero-card{min-height:300px}.hero-content{padding:24px}.hero-title{font-size:28px}.hero-actions{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}.news-grid{grid-template-columns:1fr}.t-list{grid-template-columns:1fr}.sec-t h2{font-size:20px}.f-top{grid-template-columns:1fr;gap:24px}.f-bottom{flex-direction:column;text-align:center}.login-card{padding:32px 24px}.v-ban{flex-direction:column;text-align:center}.ar-title{font-size:26px}.ar-cover{height:250px}.a-row{grid-template-columns:1fr}.a-row3{grid-template-columns:1fr}.admin-stats{grid-template-columns:1fr 1fr}.editor-toolbar{gap:2px}.editor-toolbar button{padding:4px 8px;font-size:11px}}
@@ -388,6 +391,11 @@
     </style>
 </head>
 <body>
+<div id="loadingScreen" style="position:fixed;inset:0;z-index:99999;background:#0a0a0f;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px">
+    <img src="assets/logo.png" style="height:64px;filter:drop-shadow(0 0 16px rgba(16,185,129,0.6));animation:pulse 1.5s ease-in-out infinite" alt="GG.">
+    <div style="color:#9ca3af;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-family:'Inter',sans-serif">Carregando...</div>
+    <div style="width:140px;height:3px;background:#1e1e32;border-radius:4px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,#7c3aed,#10b981);border-radius:4px;animation:loadBar 1.4s ease-in-out infinite"></div></div>
+</div>
 <div class="bg"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
 <div class="particles" id="particles"></div>
 <div class="toast-box" id="toastBox"></div>
@@ -551,18 +559,88 @@ let cUser=null,isGuest=false,isAdm=false,artTags=[],commentFilter='pending',pend
 function slugify(t){return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-').substring(0,80)}
 function uniqueSlug(base,arts,excludeId){let s=base,i=2;while(arts.find(a=>a.slug===s&&a.id!==excludeId))s=base+'-'+(i++);return s}
 function updateMeta(title,desc,img){document.title=(title?title+' — ':'')+'GG. Global Games';let m=document.querySelector('meta[name="description"]');if(!m){m=document.createElement('meta');m.name='description';document.head.appendChild(m)}m.content=desc||'Portal de notícias gamer';['og:title','og:description','og:image'].forEach(p=>{let el=document.querySelector(`meta[property="${p}"]`);if(!el){el=document.createElement('meta');el.setAttribute('property',p);document.head.appendChild(el)}});document.querySelector('meta[property="og:title"]').content=title||'GG. Global Games';document.querySelector('meta[property="og:description"]').content=desc||'Portal de notícias gamer';if(img)document.querySelector('meta[property="og:image"]').content=img}
-const DB={g:(k,d)=>{try{return JSON.parse(localStorage.getItem('gg_'+k))||d}catch(e){return d}},s:(k,v)=>localStorage.setItem('gg_'+k,JSON.stringify(v)),d:k=>localStorage.removeItem('gg_'+k)};
+// ===== FIREBASE CONFIG =====
+// INSTRUÇÕES DE CONFIGURAÇÃO:
+// 1. Acesse https://console.firebase.google.com
+// 2. Crie um novo projeto (ou use existente)
+// 3. Clique em "Adicionar app" → ícone Web (</>)
+// 4. Copie os valores da "firebaseConfig" e cole abaixo
+// 5. No painel Firebase: Realtime Database → Criar banco de dados → Modo teste → Criar
+const firebaseConfig = {
+    apiKey: "AIzaSyBCMslxQZ56tcx67fVD0vPTDq6jcSAlGVc",
+    authDomain: "gg-global-games-b2870.firebaseapp.com",
+    databaseURL: "https://gg-global-games-b2870-default-rtdb.firebaseio.com",
+    projectId: "gg-global-games-b2870",
+    storageBucket: "gg-global-games-b2870.firebasestorage.app",
+    messagingSenderId: "314797712815",
+    appId: "1:314797712815:web:9c58afc409612d7051bb5a",
+    measurementId: "G-382TLY51RL"
+};
+// ===========================
 
-// INIT DB
-(function(){
-    if(!DB.g('cats',null))DB.s('cats',[{id:1,name:'E-Sports',icon:'🏆',color:'esports',image:''},{id:2,name:'Lançamento',icon:'🚀',color:'lancamento',image:''},{id:3,name:'Análise',icon:'🎬',color:'analise',image:''},{id:4,name:'Atualização',icon:'🔄',color:'atualizacao',image:''},{id:5,name:'Indie',icon:'🕹️',color:'indie',image:''},{id:6,name:'Hardware',icon:'💻',color:'hardware',image:''}]);
-    if(!DB.g('tags',null))DB.s('tags',['FPS','RPG','MOBA','Battle Royale','Ação','Aventura']);
-    if(!DB.g('articles',null))DB.s('articles',[]);
-    if(!DB.g('pages',null))DB.s('pages',[]);
-    if(!DB.g('settings',null))DB.s('settings',{siteName:'GG.',siteDesc:'Portal Gamer',heroTitle:'BEM-VINDO AO GG.',heroDesc:'Seu portal gamer com as últimas novidades.',heroImage:''});
-    if(!DB.g('views',null))DB.s('views',{});
-    if(!DB.g('comments',null))DB.s('comments',[]);
-})();
+const SHARED = ['articles','cats','tags','settings','comments','views','pages'];
+const ARRAY_KEYS = new Set(['articles','cats','comments','pages']);
+const cache = {};
+window._fbReady = false;
+
+function toArr(v){if(!v)return[];if(Array.isArray(v))return v.filter(x=>x!=null);return Object.values(v).filter(x=>x!=null)}
+
+const DB = {
+    g:(k,d)=>{
+        if(SHARED.includes(k)){if(cache[k]===undefined)return d;return ARRAY_KEYS.has(k)?toArr(cache[k]):cache[k]}
+        try{return JSON.parse(localStorage.getItem('gg_'+k))||d}catch(e){return d}
+    },
+    s:(k,v)=>{
+        if(SHARED.includes(k)){cache[k]=v;if(window._fbReady)firebase.database().ref(k).set(v)}
+        else localStorage.setItem('gg_'+k,JSON.stringify(v))
+    },
+    d:k=>localStorage.removeItem('gg_'+k)
+};
+
+const DEFAULTS = {
+    cats:[{id:1,name:'E-Sports',icon:'🏆',color:'esports',image:''},{id:2,name:'Lançamento',icon:'🚀',color:'lancamento',image:''},{id:3,name:'Análise',icon:'🎬',color:'analise',image:''},{id:4,name:'Atualização',icon:'🔄',color:'atualizacao',image:''},{id:5,name:'Indie',icon:'🕹️',color:'indie',image:''},{id:6,name:'Hardware',icon:'💻',color:'hardware',image:''}],
+    tags:['FPS','RPG','MOBA','Battle Royale','Ação','Aventura'],
+    articles:[],pages:[],
+    settings:{siteName:'GG.',siteDesc:'Portal Gamer',heroTitle:'BEM-VINDO AO GG.',heroDesc:'Seu portal gamer com as últimas novidades.',heroImage:''},
+    views:{},comments:[]
+};
+
+function initLocalFallback(){
+    for(const k of SHARED){
+        try{const s=localStorage.getItem('gg_'+k);cache[k]=s?JSON.parse(s):DEFAULTS[k];if(!s)localStorage.setItem('gg_'+k,JSON.stringify(DEFAULTS[k]))}catch(e){cache[k]=DEFAULTS[k]}
+    }
+    const origS=DB.s.bind(DB);
+    DB.s=(k,v)=>{if(SHARED.includes(k)){cache[k]=v;localStorage.setItem('gg_'+k,JSON.stringify(v))}else localStorage.setItem('gg_'+k,JSON.stringify(v))};
+}
+
+async function initApp(){
+    const loadEl=document.getElementById('loadingScreen');
+    const fbOk=firebaseConfig.apiKey&&firebaseConfig.databaseURL;
+    if(fbOk){
+        try{
+            firebase.initializeApp(firebaseConfig);
+            const db=firebase.database();
+            const snap=await db.ref('/').get();
+            const data=snap.val()||{};
+            for(const k of SHARED){
+                cache[k]=data[k]!==undefined?data[k]:DEFAULTS[k];
+                if(data[k]===undefined)db.ref(k).set(DEFAULTS[k]);
+            }
+            window._fbReady=true;
+            for(const k of SHARED){
+                db.ref(k).on('value',s=>{const v=s.val();if(v!==null){cache[k]=v;render();if(k==='comments'){updateNotifBadge();updatePendingBadge()}}});
+            }
+        }catch(err){
+            console.error('Firebase erro:',err);
+            initLocalFallback();
+        }
+    }else{
+        console.warn('Firebase não configurado — usando localStorage');
+        initLocalFallback();
+    }
+    if(loadEl)loadEl.remove();
+    initSession();
+}
 // PARTICLES
 (function(){const c=document.getElementById('particles');for(let i=0;i<20;i++){const p=document.createElement('div');p.classList.add('particle');p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*15+10)+'s';p.style.animationDelay=(Math.random()*15)+'s';const s=(Math.random()*3+1)+'px';p.style.width=s;p.style.height=s;if(Math.random()>.5)p.style.background='#10b981';c.appendChild(p)}})();
 
@@ -881,31 +959,30 @@ document.getElementById('searchInput')?.addEventListener('keypress',e=>{if(e.key
 
 // URL TOKEN
 (function(){const h=location.hash;if(h&&h.includes('access_token')){const tk=new URLSearchParams(h.substring(1)).get('access_token');if(tk){history.replaceState(null,'',location.pathname+(location.search||''));const b=document.getElementById('googleBtn');b.classList.add('loading');fetchGU(tk,b)}}})();
-// SESSION
-(function(){
+// SESSION (called after Firebase loads)
+function initSession(){
     if(location.hash&&location.hash.includes('access_token'))return;
     const mode=DB.g('mode',''),saved=DB.g('user',null);
     const slug=new URLSearchParams(location.search).get('artigo');
     function afterAuth(){
         render();
-        if(slug){
-            const a=DB.g('articles',[]).find(x=>(x.slug===slug||String(x.id)===slug)&&x.status==='published');
-            if(a){openArticle(a.id);return}
-        }
+        if(slug){const a=DB.g('articles',[]).find(x=>(x.slug===slug||String(x.id)===slug)&&x.status==='published');if(a){openArticle(a.id);return}}
     }
     if(mode==='logged'&&saved){cUser=saved;isGuest=false;isAdm=(saved.email===ADMIN);document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');isAdm?uiAdmin(saved):uiUser(saved);afterAuth()}
     else if(mode==='guest'){isGuest=true;document.getElementById('loginPage').classList.add('hidden');document.getElementById('homePage').classList.add('active');uiGuest();afterAuth()}
     else{if(slug)pendingSlug=slug;render()}
-})();
-// POPSTATE (back/forward browser buttons)
-window.addEventListener('popstate',function(e){
+}
+// POPSTATE (back/forward)
+window.addEventListener('popstate',function(){
     const slug=new URLSearchParams(location.search).get('artigo');
-    if(slug){const a=DB.g('articles',[]).find(x=>(x.slug===slug||String(x.id)===slug)&&x.status==='published');if(a){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('articlePage').classList.add('active');document.getElementById('articleReader').innerHTML='';openArticle(a.id);return}}
+    if(slug){const a=DB.g('articles',[]).find(x=>(x.slug===slug||String(x.id)===slug)&&x.status==='published');if(a){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('articlePage').classList.add('active');openArticle(a.id);return}}
     document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
     document.getElementById('homePage').classList.add('active');
     document.getElementById('navHome').classList.add('active');
     updateMeta('','');
 });
+// START
+initApp();
 </script>
 </body>
 </html>
